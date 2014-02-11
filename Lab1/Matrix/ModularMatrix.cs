@@ -18,19 +18,17 @@ namespace LinearAlgebra
 			_matrix = new int[RowNumber, ColumnNumber];
 		}
 
-		// Marina's here
         public static ModularMatrix operator+(ModularMatrix leftHandSide, ModularMatrix rightHandSide)
         {
             var result = new ModularMatrix(leftHandSide.RowNumber, rightHandSide.ColumnNumber);
 
             for (int i = 0; i < leftHandSide.RowNumber; ++i)
                 for (int j = 0; j < rightHandSide.ColumnNumber; ++j)
-                    result[i, j] += leftHandSide[i, j] + rightHandSide[i, j];
+                    result[i, j] = leftHandSide[i, j] + rightHandSide[i, j];
 
             return result;
         }
 
-		// Vova's task
 		public static ModularMatrix operator*(ModularMatrix leftHandSide, ModularMatrix rightHandSide)
 		{
 			var result = new ModularMatrix(leftHandSide.RowNumber, rightHandSide.ColumnNumber);
