@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Matrix", "Matrix.csproj", "{786D38C4-A99F-40FE-A4C8-7054DBF5C7C7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModularMartixTests", "..\ModularMartixTests\ModularMartixTests.csproj", "{913E718F-3C19-41F0-B676-24ABAF94F5AA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{786D38C4-A99F-40FE-A4C8-7054DBF5C7C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{786D38C4-A99F-40FE-A4C8-7054DBF5C7C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{786D38C4-A99F-40FE-A4C8-7054DBF5C7C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{913E718F-3C19-41F0-B676-24ABAF94F5AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{913E718F-3C19-41F0-B676-24ABAF94F5AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{913E718F-3C19-41F0-B676-24ABAF94F5AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{913E718F-3C19-41F0-B676-24ABAF94F5AA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
