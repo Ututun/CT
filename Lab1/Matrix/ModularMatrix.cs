@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,7 +18,7 @@ namespace LinearAlgebra
 			_matrix = new int[RowNumber, ColumnNumber];
 		}
 
-		// Marina's task
+		// Marina's here
 		public static ModularMatrix operator +(ModularMatrix leftHandSide, ModularMatrix rightHandSide)
 		{
 
