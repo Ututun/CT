@@ -16,7 +16,7 @@ namespace ModularMartixTests
 			var C = A * B;
 		}
 
-		[TestMethod]
+        [TestMethod]
 		public void MultiplicationTest1()
 		{
 			var A = new Matrix(2, 2);
@@ -64,6 +64,33 @@ namespace ModularMartixTests
 			Assert.AreEqual(C[1, 1], -45);
 		}
 
+        [TestMethod, ExpectedException(typeof(IncorrectMatrixSizes))]
+        public void IncorrectMatrixSizesExceptionInAddition1()
+        {
+            var A = new Matrix(2, 3);
+            var B = new Matrix(2, 2);
+
+            var C = A + B;
+        }
+
+        [TestMethod, ExpectedException(typeof(IncorrectMatrixSizes))]
+        public void IncorrectMatrixSizesExceptionInAddition2()
+        {
+            var A = new Matrix(3, 2);
+            var B = new Matrix(2, 2);
+
+            var C = A + B;
+        }
+
+        [TestMethod, ExpectedException(typeof(IncorrectMatrixSizes))]
+        public void IncorrectMatrixSizesExceptionInAddition3()
+        {
+            var A = new Matrix(3, 3);
+            var B = new Matrix(2, 2);
+
+            var C = A + B;
+        }
+
         [TestMethod]
         public void AdditionTest1()
         {
@@ -84,6 +111,24 @@ namespace ModularMartixTests
             Assert.AreEqual(C[0, 1], 4);
             Assert.AreEqual(C[1, 0], 6);
             Assert.AreEqual(C[1, 1], 8);
+        }
+
+        [TestMethod]
+        public void ModulusOperatorTest1()
+        {
+            int module = 3;
+            var A = new Matrix(2, 2);
+            A[0, 0] = 0;
+            A[0, 1] = 1;
+            A[1, 0] = 3;
+            A[1, 1] = 5;
+
+            var C = A % module;
+
+            Assert.AreEqual(C[0, 0], 0);
+            Assert.AreEqual(C[0, 1], 1);
+            Assert.AreEqual(C[1, 0], 0);
+            Assert.AreEqual(C[1, 1], 2);
         }
 	}
 }

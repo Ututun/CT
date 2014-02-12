@@ -48,10 +48,16 @@ namespace LinearAlgebra
 		}
 
 		// Marina's task
-		//public static Matrix operator%(Matrix matrix, int module)
-		//{
-			
-		//}
+        public static Matrix operator%(Matrix matrix, int module)
+        {
+            var result = new Matrix(matrix.RowNumber, matrix.ColumnNumber);
+
+            for (int i = 0; i < matrix.RowNumber; ++i)
+                for (int j = 0; j < matrix.ColumnNumber; ++j)
+                    result[i, j] %= module;
+
+            return result;
+        }
 
 		public int this[int rowIndex, int columnIndex]
 		{
