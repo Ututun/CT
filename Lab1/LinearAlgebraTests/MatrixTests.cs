@@ -144,7 +144,22 @@ namespace LinearAlgebraTests
 		[TestMethod]
 		public void GetTransposedTest()
 		{
+            var A = new Matrix(2, 3);
+            A[0, 0] = 2;
+            A[0, 1] = 3;
+            A[0, 2] = 0;
+            A[1, 0] = 4;
+            A[1, 1] = 5;
+            A[1, 2] = 6;
 
+            var C = A.GetTransposed();
+
+            Assert.AreEqual(C[0, 0], 2);
+            Assert.AreEqual(C[0, 1], 4);
+            Assert.AreEqual(C[1, 0], 3);
+            Assert.AreEqual(C[1, 1], 5);
+            Assert.AreEqual(C[2, 0], 0);
+            Assert.AreEqual(C[2, 1], 6);
 		}
 	}
 }

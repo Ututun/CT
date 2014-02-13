@@ -11,13 +11,17 @@
 			_array = new int[Length];
 		}
 
-		// Would you be so kind, Marina, write a method
-		//public ColumnVector GetTransposed()
-		//{
+        public ColumnVector GetTransposed()
+        {
+            var result = new ColumnVector(Length);
 
-		//}
+            for (int i = 0; i < Length; ++i)
+                result[i] = _array[i];
 
-		public static RowVector operator *(RowVector vector, Matrix matrix)
+            return result;
+        }
+
+        public static RowVector operator *(RowVector vector, Matrix matrix)
 		{
 			if (vector.Length != matrix.RowNumber)
 				throw new IncorrectMatrixSizes();

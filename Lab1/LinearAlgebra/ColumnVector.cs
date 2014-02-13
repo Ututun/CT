@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LinearAlgebra
 {
-	class ColumnVector
+	public class ColumnVector
 	{
 		public int Height { get; private set; }
 		int[] _array;
@@ -17,11 +17,15 @@ namespace LinearAlgebra
 			_array = new int[Height];
 		}
 
-		// Would you be so kind, Marina, write a method
-		//public RowVector GetTransposed()
-		//{
+        public RowVector GetTransposed()
+        {
+            var result = new RowVector(Height);
 
-		//}
+            for (int i = 0; i < Height; ++i)
+                result[i] = _array[i];
+
+            return result;
+        }
 
 		public static ColumnVector operator *(Matrix matrix, ColumnVector vector)
 		{

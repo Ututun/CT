@@ -18,11 +18,16 @@ namespace LinearAlgebra
 			_matrix = new int[RowNumber, ColumnNumber];
 		}
 
-		// Would you be so kind, Marina, write a method
-		//public Matrix GetTransposed()
-		//{
-			
-		//}
+        public Matrix GetTransposed()
+        {
+            var result = new Matrix(ColumnNumber, RowNumber);
+
+            for (int i = 0; i < RowNumber; ++i)
+                for (int j = 0; j < ColumnNumber; ++j)
+                    result[j, i] = _matrix[i, j];
+
+            return result;
+        }
 
 		public static Matrix operator +(Matrix leftHandSide, Matrix rightHandSide)
 		{
