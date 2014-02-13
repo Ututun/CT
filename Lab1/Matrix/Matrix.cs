@@ -49,9 +49,13 @@ namespace LinearAlgebra
 
         public static Matrix operator%(Matrix matrix, int module)
         {
-            for (int i = 0; i < matrix.RowNumber; ++i)
-                for (int j = 0; j < matrix.ColumnNumber; ++j)
-                    matrix[i, j] %= module;
+			for (int i = 0; i < matrix.RowNumber; ++i)
+				for (int j = 0; j < matrix.ColumnNumber; ++j)
+				{
+					matrix[i, j] %= module;
+					if (matrix[i, j] < 0)
+						matrix[i, j] += module;
+				}
 
 			return matrix;
         }

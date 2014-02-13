@@ -116,19 +116,29 @@ namespace ModularMartixTests
         [TestMethod]
         public void ModulusOperatorTest1()
         {
-            int module = 3;
-            var A = new Matrix(2, 2);
-            A[0, 0] = 0;
-            A[0, 1] = 1;
-            A[1, 0] = 3;
-            A[1, 1] = 5;
+            int module = 4;
+            var A = new Matrix(3, 3);
+            A[0, 0] = -8;
+            A[0, 1] = 4;
+            A[0, 2] = -7;
+            A[1, 0] = 9;
+			A[1, 1] = -14;
+			A[1, 2] = 18;
+			A[2, 0] = 3;
+			A[2, 1] = -1;
+			A[2, 2] = 0;
 
             var C = A % module;
 
             Assert.AreEqual(C[0, 0], 0);
-            Assert.AreEqual(C[0, 1], 1);
-            Assert.AreEqual(C[1, 0], 0);
-            Assert.AreEqual(C[1, 1], 2);
+            Assert.AreEqual(C[0, 1], 0);
+            Assert.AreEqual(C[0, 2], 1);
+            Assert.AreEqual(C[1, 0], 1);
+			Assert.AreEqual(C[1, 1], 2);
+			Assert.AreEqual(C[1, 2], 2);
+			Assert.AreEqual(C[2, 0], 3);
+			Assert.AreEqual(C[2, 1], 3);
+			Assert.AreEqual(C[2, 2], 0);
         }
 	}
 }
