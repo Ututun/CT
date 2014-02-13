@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinearAlgebra", "LinearAlgebra.csproj", "{43E70429-398D-4485-A8E3-8170CF07F9E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinearAlgebraTests", "..\LinearAlgebraTests\LinearAlgebraTests.csproj", "{5D04ED6A-6A89-411E-BCDA-9CB6772976D1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{43E70429-398D-4485-A8E3-8170CF07F9E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43E70429-398D-4485-A8E3-8170CF07F9E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43E70429-398D-4485-A8E3-8170CF07F9E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43E70429-398D-4485-A8E3-8170CF07F9E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D04ED6A-6A89-411E-BCDA-9CB6772976D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D04ED6A-6A89-411E-BCDA-9CB6772976D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D04ED6A-6A89-411E-BCDA-9CB6772976D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D04ED6A-6A89-411E-BCDA-9CB6772976D1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

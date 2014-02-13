@@ -5,8 +5,8 @@ namespace LinearAlgebra
 {
 	public class IncorrectMatrixSizes : Exception { }
 
-    public class Matrix
-    {
+	public class Matrix
+	{
 		public int RowNumber { get; private set; }
 		public int ColumnNumber { get; private set; }
 		int[,] _matrix;
@@ -18,21 +18,27 @@ namespace LinearAlgebra
 			_matrix = new int[RowNumber, ColumnNumber];
 		}
 
-        public static Matrix operator+(Matrix leftHandSide, Matrix rightHandSide)
-        {
+		// Would you be so kind, Marina, write a method
+		//public Matrix GetTransposed()
+		//{
+			
+		//}
+
+		public static Matrix operator +(Matrix leftHandSide, Matrix rightHandSide)
+		{
 			if (leftHandSide.RowNumber != rightHandSide.RowNumber || leftHandSide.ColumnNumber != rightHandSide.ColumnNumber)
 				throw new IncorrectMatrixSizes();
 
-            var result = new Matrix(leftHandSide.RowNumber, rightHandSide.ColumnNumber);
+			var result = new Matrix(leftHandSide.RowNumber, rightHandSide.ColumnNumber);
 
-            for (int i = 0; i < leftHandSide.RowNumber; ++i)
-                for (int j = 0; j < rightHandSide.ColumnNumber; ++j)
-                    result[i, j] = leftHandSide[i, j] + rightHandSide[i, j];
+			for (int i = 0; i < leftHandSide.RowNumber; ++i)
+				for (int j = 0; j < rightHandSide.ColumnNumber; ++j)
+					result[i, j] = leftHandSide[i, j] + rightHandSide[i, j];
 
-            return result;
-        }
+			return result;
+		}
 
-		public static Matrix operator*(Matrix leftHandSide, Matrix rightHandSide)
+		public static Matrix operator *(Matrix leftHandSide, Matrix rightHandSide)
 		{
 			if (leftHandSide.ColumnNumber != rightHandSide.RowNumber)
 				throw new IncorrectMatrixSizes();
@@ -47,8 +53,8 @@ namespace LinearAlgebra
 			return result;
 		}
 
-        public static Matrix operator%(Matrix matrix, int module)
-        {
+		public static Matrix operator %(Matrix matrix, int module)
+		{
 			for (int i = 0; i < matrix.RowNumber; ++i)
 				for (int j = 0; j < matrix.ColumnNumber; ++j)
 				{
@@ -58,7 +64,7 @@ namespace LinearAlgebra
 				}
 
 			return matrix;
-        }
+		}
 
 		public int this[int rowIndex, int columnIndex]
 		{

@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using LinearAlgebra;
 
-namespace ModularMartixTests
+namespace LinearAlgebraTests
 {
 	[TestClass]
 	public class Tests
@@ -140,5 +140,11 @@ namespace ModularMartixTests
 			Assert.AreEqual(C[2, 1], 3);
 			Assert.AreEqual(C[2, 2], 0);
         }
+
+		[TestMethod]
+		public void GetTransposedTest()
+		{
+
+		}
 	}
 }

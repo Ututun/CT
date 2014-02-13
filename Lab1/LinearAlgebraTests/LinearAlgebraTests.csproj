@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{913E718F-3C19-41F0-B676-24ABAF94F5AA}</ProjectGuid>
+    <ProjectGuid>{5D04ED6A-6A89-411E-BCDA-9CB6772976D1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MartixTests</RootNamespace>
-    <AssemblyName>MartixTests</AssemblyName>
+    <RootNamespace>LinearAlgebraTests</RootNamespace>
+    <AssemblyName>LinearAlgebraTests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -50,13 +50,15 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Tests.cs" />
+    <Compile Include="ColumnVectorTests.cs" />
+    <Compile Include="MatrixTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RowVectorTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Matrix\Matrix.csproj">
-      <Project>{786d38c4-a99f-40fe-a4c8-7054dbf5c7c7}</Project>
-      <Name>Matrix</Name>
+    <ProjectReference Include="..\LinearAlgebra\LinearAlgebra.csproj">
+      <Project>{43e70429-398d-4485-a8e3-8170cf07f9e2}</Project>
+      <Name>LinearAlgebra</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>
