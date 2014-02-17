@@ -7,7 +7,7 @@ namespace LinearAlgebraTests
 	[TestClass]
 	public class Tests
 	{
-		[TestMethod, ExpectedException(typeof(IncorrectMatrixSizes))]
+		[TestMethod, ExpectedException(typeof(IncorrectMatrixSizesException))]
 		public void IncorrectMatrixSizesExceptionInMultiplication()
 		{
 			var A = new Matrix(2, 3);
@@ -64,7 +64,7 @@ namespace LinearAlgebraTests
 			Assert.AreEqual(C[1, 1], -45);
 		}
 
-        [TestMethod, ExpectedException(typeof(IncorrectMatrixSizes))]
+        [TestMethod, ExpectedException(typeof(IncorrectMatrixSizesException))]
         public void IncorrectMatrixSizesExceptionInAddition1()
         {
             var A = new Matrix(2, 3);
@@ -73,7 +73,7 @@ namespace LinearAlgebraTests
             var C = A + B;
         }
 
-        [TestMethod, ExpectedException(typeof(IncorrectMatrixSizes))]
+        [TestMethod, ExpectedException(typeof(IncorrectMatrixSizesException))]
         public void IncorrectMatrixSizesExceptionInAddition2()
         {
             var A = new Matrix(3, 2);
@@ -82,7 +82,7 @@ namespace LinearAlgebraTests
             var C = A + B;
         }
 
-        [TestMethod, ExpectedException(typeof(IncorrectMatrixSizes))]
+        [TestMethod, ExpectedException(typeof(IncorrectMatrixSizesException))]
         public void IncorrectMatrixSizesExceptionInAddition3()
         {
             var A = new Matrix(3, 3);

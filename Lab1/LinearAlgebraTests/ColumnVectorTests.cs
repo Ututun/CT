@@ -7,7 +7,7 @@ namespace LinearAlgebraTests
 	[TestClass]
 	public class ColumnVectorTests
 	{
-		[TestMethod, ExpectedException(typeof(IncorrectMatrixSizes))]
+		[TestMethod, ExpectedException(typeof(IncorrectMatrixSizesException))]
 		public void IncorrectMatrixSizesExceptionInMultiplication()
 		{
             var matrix = new Matrix(1, 1);

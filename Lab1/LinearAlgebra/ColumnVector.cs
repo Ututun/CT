@@ -30,7 +30,7 @@ namespace LinearAlgebra
 		public static ColumnVector operator *(Matrix matrix, ColumnVector vector)
 		{
 			if (matrix.ColumnNumber != vector.Height)
-				throw new IncorrectMatrixSizes();
+				throw new IncorrectMatrixSizesException();
 
 			var result = new ColumnVector(matrix.RowNumber);
 
@@ -41,16 +41,28 @@ namespace LinearAlgebra
 			return result;
 		}
 
+		public static ColumnVector operator *(ColumnVector vector, int number)
+		{
+			var result = new ColumnVector(vector.Height);
+
+			for (int i = 0; i < vector.Height; ++i)
+				result[i] = vector[i] * number;
+
+			return result;
+		}
+
 		public static ColumnVector operator %(ColumnVector vector, int module)
 		{
+			var result = new ColumnVector(vector.Height);
+
 			for (int i = 0; i < vector.Height; ++i)
 			{
-				vector[i] %= module;
-				if (vector[i] < 0)
-					vector[i] += module;
+				result[i] = vector[i] % module;
+				if (result[i] < 0)
+					result[i] += module;
 			}
 
-			return vector;
+			return result;
 		}
 
 		public int this[int index]

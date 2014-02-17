@@ -21,10 +21,23 @@
             return result;
         }
 
+		public static RowVector operator +(RowVector rightHandSide, RowVector leftHandSide)
+		{
+			if (rightHandSide.Length != leftHandSide.Length)
+				throw new IncorrectMatrixSizesException();
+
+			var result = new RowVector(rightHandSide.Length);
+
+			for (int i = 0; i < rightHandSide.Length; ++i)
+				result[i] = rightHandSide[i] + leftHandSide[i];
+
+			return result;
+		}
+
         public static RowVector operator *(RowVector vector, Matrix matrix)
 		{
 			if (vector.Length != matrix.RowNumber)
-				throw new IncorrectMatrixSizes();
+				throw new IncorrectMatrixSizesException();
 
 			var result = new RowVector(matrix.ColumnNumber);
 
@@ -35,16 +48,45 @@
 			return result;
 		}
 
+		public static RowVector operator *(RowVector vector, int number)
+		{
+			var result = new RowVector(vector.Length);
+
+			for (int i = 0; i < vector.Length; ++i)
+				result[i] = vector[i] * number;
+
+			return result;
+		}
+
+		public static bool operator ==(RowVector rightHandSide, RowVector leftHandSide)
+		{
+			if (rightHandSide.Length != leftHandSide.Length)
+				throw new IncorrectMatrixSizesException();
+
+			for (int i = 0; i < rightHandSide.Length; ++i)
+				if (rightHandSide[i] != leftHandSide[i])
+					return false;
+
+			return true;
+		}
+
+		public static bool operator !=(RowVector rightHandSide, RowVector leftHandSide)
+		{
+			return !(rightHandSide == leftHandSide);
+		}
+
 		public static RowVector operator %(RowVector vector, int module)
 		{
+			var result = new RowVector(vector.Length);
+
 			for (int i = 0; i < vector.Length; ++i)
 			{
-				vector[i] %= module;
-				if (vector[i] < 0)
-					vector[i] += module;
+				result[i] = vector[i] % module;
+				if (result[i] < 0)
+					result[i] += module;
 			}
 
-			return vector;
+			return result;
 		}
 
 		public int this[int index]
