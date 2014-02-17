@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace LinearAlgebra
 {
-	public class IncorrectMatrixSizes : Exception { }
+	public class IncorrectMatrixSizesException : Exception { }
 
 	public class Matrix
 	{
@@ -32,7 +32,7 @@ namespace LinearAlgebra
 		public static Matrix operator +(Matrix leftHandSide, Matrix rightHandSide)
 		{
 			if (leftHandSide.RowNumber != rightHandSide.RowNumber || leftHandSide.ColumnNumber != rightHandSide.ColumnNumber)
-				throw new IncorrectMatrixSizes();
+				throw new IncorrectMatrixSizesException();
 
 			var result = new Matrix(leftHandSide.RowNumber, rightHandSide.ColumnNumber);
 
@@ -46,7 +46,7 @@ namespace LinearAlgebra
 		public static Matrix operator *(Matrix leftHandSide, Matrix rightHandSide)
 		{
 			if (leftHandSide.ColumnNumber != rightHandSide.RowNumber)
-				throw new IncorrectMatrixSizes();
+				throw new IncorrectMatrixSizesException();
 
 			var result = new Matrix(leftHandSide.RowNumber, rightHandSide.ColumnNumber);
 
@@ -60,21 +60,39 @@ namespace LinearAlgebra
 
 		public static Matrix operator %(Matrix matrix, int module)
 		{
+			var result = new Matrix(matrix.RowNumber, matrix.ColumnNumber);
+
 			for (int i = 0; i < matrix.RowNumber; ++i)
 				for (int j = 0; j < matrix.ColumnNumber; ++j)
 				{
-					matrix[i, j] %= module;
-					if (matrix[i, j] < 0)
-						matrix[i, j] += module;
+					result[i, j] = matrix[i, j] % module;
+					if (result[i, j] < 0)
+						result[i, j] += module;
 				}
 
-			return matrix;
+			return result;
 		}
 
 		public int this[int rowIndex, int columnIndex]
 		{
 			get { return _matrix[rowIndex, columnIndex]; }
 			set { _matrix[rowIndex, columnIndex] = value; }
+		}
+
+		public ColumnVector this[int index]
+		{
+			get 
+			{
+				var result = new ColumnVector(RowNumber);
+				for (int i = 0; i < RowNumber; ++i)
+					result[i] = _matrix[i, index];
+				return result;
+			}
+			set 
+			{
+				for (int i = 0; i < RowNumber; ++i)
+					_matrix[i, index] = value[i];
+			}
 		}
 	}
 }
