@@ -6,12 +6,12 @@ namespace Coders
 	{
 		Matrix _codingMatrix, _decodingMatrix;
 
-		sealed public override Vector Encode(Vector information)
+		sealed public override RowVector Encode(RowVector information)
 		{
 			return information * _codingMatrix;
 		}
 
-		sealed public override Vector Decode(Vector cipher)
+		sealed public override RowVector Decode(RowVector cipher)
 		{
 			return cipher * _decodingMatrix;
 		}

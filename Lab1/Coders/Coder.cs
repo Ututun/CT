@@ -2,11 +2,11 @@
 
 namespace Coders
 {
-    abstract class Coder
+    public abstract class Coder
     {
-		int _informationCharacterNumber, _blockLength;
+		internal int _informationCharactersNumber, _blockLength;
 
-		abstract public Vector Encode(Vector information);
-		abstract public Vector Decode(Vector cipher);
+		abstract public RowVector Encode(RowVector information);
+		abstract public RowVector Decode(RowVector cipher);
     }
 }
