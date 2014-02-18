@@ -19,49 +19,28 @@ namespace LinearAlgebraTests
         [TestMethod]
 		public void MultiplicationTest1()
 		{
-			var A = new Matrix(2, 2);
-			A[0, 0] = 1;
-			A[0, 1] = 2;
-			A[1, 0] = 3;
-			A[1, 1] = 4;
-			var B = new Matrix(2, 2);
-			B[0, 0] = 1;
-			B[0, 1] = 2;
-			B[1, 0] = 3;
-			B[1, 1] = 4;
+			var A = new Matrix { new RowVector { 1, 2 },
+								 new RowVector { 3, 4} };
+            var B = new Matrix { new RowVector { 1, 2 },
+								 new RowVector { 3, 4} };
 
 			var C = A * B;
 
-			Assert.AreEqual(C[0, 0], 7);
-			Assert.AreEqual(C[0, 1], 10);
-			Assert.AreEqual(C[1, 0], 15);
-			Assert.AreEqual(C[1, 1], 22);
+            CollectionAssert.AreEqual(C, new[,] { { 7, 10 }, { 15, 22 } });
 		}
 
 		[TestMethod]
 		public void MultiplicationTest2()
 		{
-			var A = new Matrix(2, 3);
-			A[0, 0] = -1;
-			A[0, 1] = 0;
-			A[0, 2] = 1;
-			A[1, 0] = 6;
-			A[1, 1] = 0;
-			A[1, 2] = 9;
-			var B = new Matrix(3, 2);
-			B[0, 0] = -6;
-			B[0, 1] = 6;
-			B[1, 0] = 9;
-			B[1, 1] = 7;
-			B[2, 0] = 3;
-			B[2, 1] = -9;
+            var A = new Matrix { new RowVector { -1, 0, 1 },
+								 new RowVector { 6, 0, 9} };
+            var B = new Matrix { new RowVector { -6, 6 },
+								 new RowVector { 9, 7},
+								 new RowVector { 3, -9} };
 
 			var C = A * B;
 
-			Assert.AreEqual(C[0, 0], 9);
-			Assert.AreEqual(C[0, 1], -15);
-			Assert.AreEqual(C[1, 0], -9);
-			Assert.AreEqual(C[1, 1], -45);
+            CollectionAssert.AreEqual(C, new[,] { { 9, -15 }, { -9, -45 } });
 		}
 
         [TestMethod, ExpectedException(typeof(IncorrectMatrixSizesException))]
@@ -94,72 +73,38 @@ namespace LinearAlgebraTests
         [TestMethod]
         public void AdditionTest1()
         {
-            var A = new Matrix(2, 2);
-            A[0, 0] = 1;
-            A[0, 1] = 2;
-            A[1, 0] = 3;
-            A[1, 1] = 4;
-            var B = new Matrix(2, 2);
-            B[0, 0] = 1;
-            B[0, 1] = 2;
-            B[1, 0] = 3;
-            B[1, 1] = 4;
+            var A = new Matrix {new RowVector { 1, 2 },
+								new RowVector { 3, 4} };
+            var B = new Matrix {new RowVector { 1, 2 },
+								new RowVector { 3, 4} };
 
             var C = A + B;
 
-            Assert.AreEqual(C[0, 0], 2);
-            Assert.AreEqual(C[0, 1], 4);
-            Assert.AreEqual(C[1, 0], 6);
-            Assert.AreEqual(C[1, 1], 8);
+            CollectionAssert.AreEqual(C, new[,] { { 2, 4 }, { 6, 8 } });
         }
 
         [TestMethod]
         public void ModulusOperatorTest1()
         {
             int module = 4;
-            var A = new Matrix(3, 3);
-            A[0, 0] = -8;
-            A[0, 1] = 4;
-            A[0, 2] = -7;
-            A[1, 0] = 9;
-			A[1, 1] = -14;
-			A[1, 2] = 18;
-			A[2, 0] = 3;
-			A[2, 1] = -1;
-			A[2, 2] = 0;
+            var A = new Matrix { new RowVector { -8, 4, -7 },
+                                 new RowVector { 9, -14, 18 },
+                                 new RowVector { 3, -1, 0 } };
 
             var C = A % module;
 
-            Assert.AreEqual(C[0, 0], 0);
-            Assert.AreEqual(C[0, 1], 0);
-            Assert.AreEqual(C[0, 2], 1);
-            Assert.AreEqual(C[1, 0], 1);
-			Assert.AreEqual(C[1, 1], 2);
-			Assert.AreEqual(C[1, 2], 2);
-			Assert.AreEqual(C[2, 0], 3);
-			Assert.AreEqual(C[2, 1], 3);
-			Assert.AreEqual(C[2, 2], 0);
+            CollectionAssert.AreEqual(C, new[,] { { 0, 0, 1  }, { 1, 2, 2 }, { 3, 3, 0 } });
         }
 
 		[TestMethod]
 		public void GetTransposedTest()
 		{
-            var A = new Matrix(2, 3);
-            A[0, 0] = 2;
-            A[0, 1] = 3;
-            A[0, 2] = 0;
-            A[1, 0] = 4;
-            A[1, 1] = 5;
-            A[1, 2] = 6;
+            var A = new Matrix { new RowVector { 2, 3, 0 },
+                                 new RowVector { 4, 5, 6 } };
 
             var C = A.GetTransposed();
 
-            Assert.AreEqual(C[0, 0], 2);
-            Assert.AreEqual(C[0, 1], 4);
-            Assert.AreEqual(C[1, 0], 3);
-            Assert.AreEqual(C[1, 1], 5);
-            Assert.AreEqual(C[2, 0], 0);
-            Assert.AreEqual(C[2, 1], 6);
+            CollectionAssert.AreEqual(C, new[,] { { 2, 4 }, { 3, 5 }, { 0, 6 } });
 		}
 	}
 }
