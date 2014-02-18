@@ -19,10 +19,7 @@ namespace LinearAlgebraTests
 		[TestMethod]
 		public void MultiplicationTest()
 		{
-            var vector = new ColumnVector(3);
-            vector[0] = 1;
-            vector[1] = 1;
-            vector[2] = 1;
+			var vector = new ColumnVector { 1, 1, 1 };
             var A = new Matrix(3, 3);
             A[0, 0] = -8;
             A[0, 1] = 4;
@@ -36,44 +33,28 @@ namespace LinearAlgebraTests
 
             var C = A * vector;
 
-            Assert.AreEqual(C[0], -11);
-            Assert.AreEqual(C[1], 13);
-            Assert.AreEqual(C[2], 2);   
+			CollectionAssert.AreEqual(C, new[] { -11, 13, 2 });
 		}
 
 		[TestMethod]
 		public void ModulusOperatorTest()
 		{
             int module = 4;
-            var vector = new ColumnVector(5);
-            vector[0] = 0;
-            vector[1] = 1;
-            vector[2] = 4;
-            vector[3] = 6;
-            vector[4] = 7;
+			var vector = new ColumnVector { 0, 1, 4, 6, 7 };
 
             var result = vector % module;
 
-            Assert.AreEqual(result[0], 0);
-            Assert.AreEqual(result[1], 1);
-            Assert.AreEqual(result[2], 0);
-            Assert.AreEqual(result[3], 2);
-            Assert.AreEqual(result[4], 3);
+			CollectionAssert.AreEqual(result, new[] { 0, 1, 0, 2, 3 });
 		}
 
 		[TestMethod]
 		public void GetTransposedTest()
 		{
-            var vector = new ColumnVector(3);
-            vector[0] = 1;
-            vector[1] = 2;
-            vector[2] = 3;
+			var vector = new ColumnVector { 1, 2, 3 };
 
             var result = vector.GetTransposed();
 
-            Assert.AreEqual(result[0], 1);
-            Assert.AreEqual(result[1], 2);
-            Assert.AreEqual(result[2], 3);
+			CollectionAssert.AreEqual(result, new[] { 1, 2, 3 });
 		}
 	}
 }

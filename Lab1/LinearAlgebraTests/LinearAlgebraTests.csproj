@@ -35,6 +35,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="LinearAlgebra, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\LinearAlgebra\bin\Debug\LinearAlgebra.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <Choose>
@@ -54,12 +58,6 @@
     <Compile Include="MatrixTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RowVectorTests.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\LinearAlgebra\LinearAlgebra.csproj">
-      <Project>{43e70429-398d-4485-a8e3-8170cf07f9e2}</Project>
-      <Name>LinearAlgebra</Name>
-    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

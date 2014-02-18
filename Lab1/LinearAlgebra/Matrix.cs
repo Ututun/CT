@@ -5,11 +5,18 @@ namespace LinearAlgebra
 {
 	public class IncorrectMatrixSizesException : Exception { }
 
-	public class Matrix
+	public class Matrix : ICollection
 	{
 		public int RowNumber { get; private set; }
 		public int ColumnNumber { get; private set; }
 		int[,] _matrix;
+
+		public Matrix()
+		{
+			RowNumber = 0;
+			ColumnNumber = 0;
+			_matrix = new int[RowNumber, ColumnNumber];
+		}
 
 		public Matrix(int rowNumber, int columnNumber)
 		{
@@ -94,5 +101,82 @@ namespace LinearAlgebra
 					_matrix[i, index] = value[i];
 			}
 		}
+
+		public void Add(RowVector item)
+		{
+			if (ColumnNumber == 0)
+				ColumnNumber = item.Count;
+
+			if (ColumnNumber != item.Count)
+				throw new IncorrectMatrixSizesException();
+
+			var newMatrix = new int[RowNumber + 1, ColumnNumber];
+
+			MatricesCopy(_matrix, newMatrix, 0, RowNumber, 0, ColumnNumber);
+
+			for (int i = 0; i < ColumnNumber; ++i)
+				newMatrix[RowNumber, i] = item[i];
+
+			_matrix = newMatrix;
+			++RowNumber;
+		}
+
+		public void Add(ColumnVector item)
+		{
+			if (RowNumber == 0)
+				RowNumber = item.Count;
+
+			if (RowNumber != item.Count)
+				throw new IncorrectMatrixSizesException();
+
+			var newMatrix = new int[RowNumber, ColumnNumber + 1];
+
+			MatricesCopy(_matrix, newMatrix, 0, RowNumber, 0, ColumnNumber);
+
+			for (int i = 0; i < RowNumber; ++i)
+				newMatrix[i, ColumnNumber] = item[i];
+
+			_matrix = newMatrix;
+			++ColumnNumber;
+		}
+
+		private void MatricesCopy(int[,] sourceMatrix, int[,] destinationMatrix, 
+								  int rowBegin, int rowEnd, int columnBegin, int columnEnd)
+		{
+			for (int i = rowBegin; i < rowEnd; ++i)
+				for (int j = columnBegin; j < columnEnd; ++j)
+					destinationMatrix[i, j] = sourceMatrix[i, j];
+		}
+
+		#region ICollection
+
+		public void CopyTo(Array array, int index)
+		{
+			for (int i = 0; i < RowNumber; ++i)
+				for (int j = 0; j < ColumnNumber; ++j)
+					array.SetValue(_matrix[i, j], index + i * ColumnNumber + j);
+		}
+
+		public int Count
+		{
+			get { return RowNumber * ColumnNumber; }
+		}
+
+		public bool IsSynchronized
+		{
+			get { throw new NotImplementedException(); }
+		}
+
+		public object SyncRoot
+		{
+			get { throw new NotImplementedException(); }
+		}
+
+		public IEnumerator GetEnumerator()
+		{
+			return _matrix.GetEnumerator();
+		}
+
+		#endregion
 	}
 }
