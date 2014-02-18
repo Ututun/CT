@@ -58,7 +58,7 @@ namespace Coders
 		{
 			int result = 0, digit = 1;
 
-			for (int i = vector.Height - 1; i >= 0; --i)
+			for (int i = vector.Count - 1; i >= 0; --i)
 			{
 				result += vector[i] * digit;
 				digit *= _module;
@@ -115,7 +115,7 @@ namespace Coders
 
 		private bool IsZeroRowVector(RowVector vector)
 		{
-			for (int i = 0; i < vector.Length; ++i)
+			for (int i = 0; i < vector.Count; ++i)
 				if (vector[i] > 0)
 					return false;
 

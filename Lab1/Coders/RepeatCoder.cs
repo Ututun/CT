@@ -20,7 +20,7 @@ namespace Coders
 
 		public override RowVector Encode(RowVector information)
 		{
-			if (information.Length != _informationCharactersNumber)
+			if (information.Count != _informationCharactersNumber)
 				throw new IncorrectInformationRowVectorLengthException();
 
 			var result = new RowVector(_blockLength);
