@@ -56,6 +56,42 @@ namespace LinearAlgebraTests
             CollectionAssert.AreEqual(C, new[] { 34, -4, -29, 118 });
         }
 
+        [TestMethod]
+        public void CompareTest1()
+        {
+            var vectorCompare = new RowVector { 1, 0, 4, 5 };
+            var vector = new RowVector { 1, 0, 4, 5 };
+
+            Assert.AreEqual(true, vectorCompare == vector);
+        }
+
+        [TestMethod]
+        public void CompareTest2()
+        {
+            var vectorCompare = new RowVector { 1, 0, 4, 5 };
+            var vector = new RowVector { 1, 0, 4, 6 };
+
+            Assert.AreEqual(true, vectorCompare != vector);
+        }
+
+        [TestMethod]
+        public void CompareTest3()
+        {
+            var vectorCompare = new RowVector { 1, 0, 4, 5 };
+            var vector = new RowVector { 1, 0, 4, 6 };
+
+            Assert.AreEqual(false, vectorCompare == vector);
+        }
+
+        [TestMethod]
+        public void CompareTest4()
+        {
+            var vectorCompare = new RowVector { 1, 0, 4, 5 };
+            var vector = new RowVector { 1, 0, 4, 5 };
+
+            Assert.AreEqual(false, vectorCompare != vector);
+        }
+
 		[TestMethod]
 		public void ModulusOperatorTest1()
 		{
