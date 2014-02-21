@@ -3,8 +3,6 @@ using LinearAlgebra;
 
 namespace Coders
 {
-	public class SyndromeException : Exception { }
-
 	public class HammingCoder : Coder
 	{
 		Matrix _checkingMatrix;
