@@ -34,7 +34,7 @@ namespace CodersTests
 
 			var result = coder.Encode(information);
 
-            CollectionAssert.AreEqual(result, new[] { 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1 });
+            CollectionAssert.AreEqual(new[] { 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1 }, result);
 		}
 
         [TestMethod]
@@ -45,7 +45,7 @@ namespace CodersTests
 
             var result = coder.Encode(information);
 
-            CollectionAssert.AreEqual(result, new[] { 1, 0, 1, 0, 1, 0, 1, 0, 1, 0 });
+            CollectionAssert.AreEqual(new[] { 1, 0, 1, 0, 1, 0, 1, 0, 1, 0 }, result);
         }
 
         [TestMethod]
@@ -56,7 +56,7 @@ namespace CodersTests
 
             var result = coder.Encode(information);
 
-            CollectionAssert.AreEqual(result, new[] { 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0 });
+            CollectionAssert.AreEqual(new[] { 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0 }, result);
         }
 
 		[TestMethod]
@@ -67,7 +67,7 @@ namespace CodersTests
 
 			var result = coder.Decode(cipher);
 
-            CollectionAssert.AreEqual(result, new[] { 1, 0, 0, 1 });
+            CollectionAssert.AreEqual(new[] { 1, 0, 0, 1 }, result);
 		}
 
         [TestMethod]
@@ -78,7 +78,7 @@ namespace CodersTests
 
             var result = coder.Decode(cipher);
 
-            CollectionAssert.AreEqual(result, new[] { 1, 0, 0 });
+            CollectionAssert.AreEqual(new[] { 1, 0, 0 }, result);
         }
 
         [TestMethod]
@@ -89,7 +89,7 @@ namespace CodersTests
 
             var result = coder.Decode(cipher);
 
-            CollectionAssert.AreEqual(result, new[] { 1, 0 });
+            CollectionAssert.AreEqual(new[] { 1, 0 }, result);
         }
 	}
 }

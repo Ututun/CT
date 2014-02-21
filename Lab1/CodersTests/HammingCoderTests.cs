@@ -16,7 +16,7 @@ namespace CodersTests
 
 			var result = coder.Encode(information);
 
-            CollectionAssert.AreEqual(result, new[] { 1, 1, 1 });
+            CollectionAssert.AreEqual(new[] { 1, 1, 1 }, result);
 		}
 
 		[TestMethod]
@@ -27,7 +27,7 @@ namespace CodersTests
 
 			var result = coder.Encode(information);
 
-            CollectionAssert.AreEqual(result, new[] { 1, 0, 0, 1, 1 });
+            CollectionAssert.AreEqual(new[] { 1, 0, 0, 1, 1 }, result);
 		}
 
 		[TestMethod]
@@ -38,7 +38,7 @@ namespace CodersTests
 
 			var result = coder.Encode(information);
 
-            CollectionAssert.AreEqual(result, new[] { 0, 0, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1 });
+            CollectionAssert.AreEqual(new[] { 0, 0, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1 }, result);
 		}
 
 		[TestMethod]
@@ -49,7 +49,7 @@ namespace CodersTests
 
 			var result = coder.Encode(information);
 
-            CollectionAssert.AreEqual(result, new[] { 2, 0, 2, 1 });
+            CollectionAssert.AreEqual(new[] { 2, 0, 2, 1 }, result);
 		}
 
 		[TestMethod]
@@ -60,7 +60,7 @@ namespace CodersTests
 
 			var result = coder.Encode(information);
 
-            CollectionAssert.AreEqual(result, new[] { 3, 4, 2, 3, 0, 1 });
+            CollectionAssert.AreEqual(new[] { 3, 4, 2, 3, 0, 1 }, result);
 		}
 
 		[TestMethod]
@@ -71,7 +71,7 @@ namespace CodersTests
 
 			var result = coder.Encode(information);
 
-            CollectionAssert.AreEqual(result, new[] { 2, 0, 0, 1, 2, 0, 2, 0, 0, 2 });
+            CollectionAssert.AreEqual(new[] { 2, 0, 0, 1, 2, 0, 2, 0, 0, 2 }, result);
 		}
 
 		[TestMethod]
@@ -82,7 +82,7 @@ namespace CodersTests
 
 			var result = coder.Encode(information);
 
-            CollectionAssert.AreEqual(result, new[] { 2, 1, 0, 1, 1, 2, 1, 0, 1, 2, 1, 0, 1 });
+            CollectionAssert.AreEqual(new[] { 2, 1, 0, 1, 1, 2, 1, 0, 1, 2, 1, 0, 1 }, result);
 		}
 
 		[TestMethod]
@@ -93,7 +93,7 @@ namespace CodersTests
 
 			var result = coder.Encode(information);
 
-            CollectionAssert.AreEqual(result, new[] { 1, 4, 4, 2, 0, 1, 2, 3, 3, 1, 2, 3, 4, 3, 4 });
+            CollectionAssert.AreEqual(new[] { 1, 4, 4, 2, 0, 1, 2, 3, 3, 1, 2, 3, 4, 3, 4 }, result);
 		}
 
 		[TestMethod]
@@ -104,7 +104,7 @@ namespace CodersTests
 
 			var result = coder.Decode(cipher);
 
-            CollectionAssert.AreEqual(result, new[] { 2, 3, 0, 1 });
+            CollectionAssert.AreEqual(new[] { 2, 3, 0, 1 }, result);
 		}
 
 		[TestMethod]
@@ -115,7 +115,7 @@ namespace CodersTests
 
 			var result = coder.Decode(cipher);
 
-            CollectionAssert.AreEqual(result, new[] { 0, 1, 0, 2, 0, 0, 2 });
+            CollectionAssert.AreEqual(new[] { 0, 1, 0, 2, 0, 0, 2 }, result);
 		}
 
 		[TestMethod]
@@ -126,7 +126,7 @@ namespace CodersTests
 
 			var result = coder.Decode(cipher);
 
-            CollectionAssert.AreEqual(result, new[] { 0, 1, 0, 2, 0, 0, 2 });
+            CollectionAssert.AreEqual(new[] { 0, 1, 0, 2, 0, 0, 2 }, result);
 		}
 
 		[TestMethod]
@@ -137,7 +137,7 @@ namespace CodersTests
 
 			var result = coder.Decode(cipher);
 
-            CollectionAssert.AreEqual(result, new[] { 0, 1, 0, 2, 0, 0, 2 });
+            CollectionAssert.AreEqual(new[] { 0, 1, 0, 2, 0, 0, 2 }, result);
 		}
 
 		[TestMethod]
@@ -148,7 +148,7 @@ namespace CodersTests
 
 			var result = coder.Decode(cipher);
 
-            CollectionAssert.AreEqual(result, new[] { 0, 1, 2, 1, 0, 1, 2, 1, 0, 1 });
+            CollectionAssert.AreEqual(new[] { 0, 1, 2, 1, 0, 1, 2, 1, 0, 1 }, result);
 		}
 
 		[TestMethod]
@@ -159,7 +159,7 @@ namespace CodersTests
 
 			var result = coder.Decode(cipher);
 
-            CollectionAssert.AreEqual(result, new[] { 0, 1, 2, 1, 0, 1, 2, 1, 0, 1 });
+            CollectionAssert.AreEqual(new[] { 0, 1, 2, 1, 0, 1, 2, 1, 0, 1 }, result);
 		}
 
 		[TestMethod]
@@ -170,7 +170,7 @@ namespace CodersTests
 
 			var result = coder.Decode(cipher);
 
-            CollectionAssert.AreEqual(result, new[] { 0, 1, 2, 1, 0, 1, 2, 1, 0, 1 });
+            CollectionAssert.AreEqual(new[] { 0, 1, 2, 1, 0, 1, 2, 1, 0, 1 }, result);
 		}
 
 		[TestMethod]
@@ -181,7 +181,7 @@ namespace CodersTests
 
 			var result = coder.Decode(cipher);
 
-            CollectionAssert.AreEqual(result, new[] { 4, 2, 0, 1, 3, 3, 1, 2, 3, 4, 3, 4 });
+            CollectionAssert.AreEqual(new[] { 4, 2, 0, 1, 3, 3, 1, 2, 3, 4, 3, 4 }, result);
 		}
 
 		[TestMethod]
@@ -192,7 +192,7 @@ namespace CodersTests
 
 			var result = coder.Decode(cipher);
 
-            CollectionAssert.AreEqual(result, new[] { 4, 2, 0, 1, 3, 3, 1, 2, 3, 4, 3, 4 });
+            CollectionAssert.AreEqual(new[] { 4, 2, 0, 1, 3, 3, 1, 2, 3, 4, 3, 4 }, result);
 		}
 
 		[TestMethod]
@@ -203,7 +203,7 @@ namespace CodersTests
 
 			var result = coder.Decode(cipher);
 
-            CollectionAssert.AreEqual(result, new[] { 4, 2, 0, 1, 3, 3, 1, 2, 3, 4, 3, 4 });
+            CollectionAssert.AreEqual(new[] { 4, 2, 0, 1, 3, 3, 1, 2, 3, 4, 3, 4 }, result);
 		}
 
 		[TestMethod]
@@ -214,7 +214,7 @@ namespace CodersTests
 
 			var result = coder.Decode(cipher);
 
-            CollectionAssert.AreEqual(result, new[] { 4, 2, 0, 1, 3, 3, 1, 2, 3, 4, 3, 4 });
+            CollectionAssert.AreEqual(new[] { 4, 2, 0, 1, 3, 3, 1, 2, 3, 4, 3, 4 }, result);
 		}
 	}
 }

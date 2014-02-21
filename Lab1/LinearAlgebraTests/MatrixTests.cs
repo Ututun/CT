@@ -44,7 +44,7 @@ namespace LinearAlgebraTests
 
 			var C = A * B;
 
-            CollectionAssert.AreEqual(C, new[,] { { 7, 10 }, { 15, 22 } });
+            CollectionAssert.AreEqual(new[,] { { 7, 10 }, { 15, 22 } }, C);
 		}
 
 		[TestMethod]
@@ -58,7 +58,7 @@ namespace LinearAlgebraTests
 
 			var C = A * B;
 
-            CollectionAssert.AreEqual(C, new[,] { { 9, -15 }, { -9, -45 } });
+            CollectionAssert.AreEqual(new[,] { { 9, -15 }, { -9, -45 } }, C);
 		}
 
         [TestMethod, ExpectedException(typeof(IncorrectMatrixSizesException))]
@@ -98,7 +98,7 @@ namespace LinearAlgebraTests
 
             var C = A + B;
 
-            CollectionAssert.AreEqual(C, new[,] { { 2, 4 }, { 6, 8 } });
+            CollectionAssert.AreEqual(new[,] { { 2, 4 }, { 6, 8 } }, C);
         }
 
         [TestMethod]
@@ -111,7 +111,7 @@ namespace LinearAlgebraTests
 
             var C = A % module;
 
-            CollectionAssert.AreEqual(C, new[,] { { 0, 0, 1  }, { 1, 2, 2 }, { 3, 3, 0 } });
+            CollectionAssert.AreEqual(new[,] { { 0, 0, 1  }, { 1, 2, 2 }, { 3, 3, 0 } }, C);
         }
 
 		[TestMethod]
@@ -122,7 +122,7 @@ namespace LinearAlgebraTests
 
             var C = A.GetTransposed();
 
-            CollectionAssert.AreEqual(C, new[,] { { 2, 4 }, { 3, 5 }, { 0, 6 } });
+            CollectionAssert.AreEqual(new[,] { { 2, 4 }, { 3, 5 }, { 0, 6 } }, C);
 		}
 
         [TestMethod]
@@ -134,7 +134,7 @@ namespace LinearAlgebraTests
 
             var C = A.GetTransposed();
 
-            CollectionAssert.AreEqual(C, new[,] { { 2, 4, 1 }, { 3, 5, 0 }, { 0, 6, 4 }, { 1, 2, 7 } });
+            CollectionAssert.AreEqual(new[,] { { 2, 4, 1 }, { 3, 5, 0 }, { 0, 6, 4 }, { 1, 2, 7 } }, C);
         }
 
         [TestMethod]
@@ -145,7 +145,7 @@ namespace LinearAlgebraTests
 
             A.Add(vector);
 
-            CollectionAssert.AreEqual(A, new[,] { { 1, 0, 3, 4 } });
+            CollectionAssert.AreEqual(new[,] { { 1, 0, 3, 4 } }, A);
         }
 
         [TestMethod]
@@ -158,7 +158,7 @@ namespace LinearAlgebraTests
 
             A.Add(vector);
 
-            CollectionAssert.AreEqual(A, new[,] { { 2, 3, 0, 1 }, { 4, 5, 6, 2 }, { 1, 0, 4, 7 }, { 1, 0, 3, 4 } });
+            CollectionAssert.AreEqual(new[,] { { 2, 3, 0, 1 }, { 4, 5, 6, 2 }, { 1, 0, 4, 7 }, { 1, 0, 3, 4 } }, A);
         }
 
         [TestMethod]
@@ -169,7 +169,7 @@ namespace LinearAlgebraTests
 
             A.Add(vector);
 
-            CollectionAssert.AreEqual(A, new[,] { { 1 }, { 0 }, { 3 } });
+            CollectionAssert.AreEqual(new[,] { { 1 }, { 0 }, { 3 } }, A);
         }
 
         [TestMethod]
@@ -182,7 +182,7 @@ namespace LinearAlgebraTests
 
             A.Add(vector);
 
-            CollectionAssert.AreEqual(A, new[,] { { 2, 3, 0, 1, 1 }, { 4, 5, 6, 2, 0 }, { 1, 0, 4, 7, 3 } });
+            CollectionAssert.AreEqual(new[,] { { 2, 3, 0, 1, 1 }, { 4, 5, 6, 2, 0 }, { 1, 0, 4, 7, 3 } }, A);
         }
 
         [TestMethod]
@@ -195,7 +195,7 @@ namespace LinearAlgebraTests
 
             A.CopyTo(result, 0);
 
-            CollectionAssert.AreEqual(result, new[] { 2, 3, 0, 1, 4, 5, 6, 2, 1, 0, 4, 7 });
+            CollectionAssert.AreEqual(new[] { 2, 3, 0, 1, 4, 5, 6, 2, 1, 0, 4, 7 }, result);
         }
 
         [TestMethod]
@@ -208,7 +208,7 @@ namespace LinearAlgebraTests
 
             A.CopyTo(result, 2);
 
-            CollectionAssert.AreEqual(result, new[] { 0, 0, 2, 3 , 0, 1, 4, 5, 6, 2, 1, 0, 4, 7, 0, 0 });
+            CollectionAssert.AreEqual(new[] { 0, 0, 2, 3, 0, 1, 4, 5, 6, 2, 1, 0, 4, 7, 0, 0 }, result);
         }
 	}
 }
