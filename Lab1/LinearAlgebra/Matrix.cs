@@ -36,31 +36,31 @@ namespace LinearAlgebra
             return result;
         }
 
-		public static Matrix operator +(Matrix leftHandSide, Matrix rightHandSide)
+		public static Matrix operator +(Matrix rightHandSide, Matrix leftHandSide)
 		{
-			if (leftHandSide.RowNumber != rightHandSide.RowNumber || leftHandSide.ColumnNumber != rightHandSide.ColumnNumber)
+			if (rightHandSide.RowNumber != leftHandSide.RowNumber || rightHandSide.ColumnNumber != leftHandSide.ColumnNumber)
 				throw new IncorrectMatrixSizesException();
 
-			var result = new Matrix(leftHandSide.RowNumber, rightHandSide.ColumnNumber);
+			var result = new Matrix(rightHandSide.RowNumber, leftHandSide.ColumnNumber);
 
-			for (int i = 0; i < leftHandSide.RowNumber; ++i)
-				for (int j = 0; j < rightHandSide.ColumnNumber; ++j)
-					result[i, j] = leftHandSide[i, j] + rightHandSide[i, j];
+			for (int i = 0; i < rightHandSide.RowNumber; ++i)
+				for (int j = 0; j < leftHandSide.ColumnNumber; ++j)
+					result[i, j] = rightHandSide[i, j] + leftHandSide[i, j];
 
 			return result;
 		}
 
-		public static Matrix operator *(Matrix leftHandSide, Matrix rightHandSide)
+		public static Matrix operator *(Matrix rightHandSide, Matrix leftHandSide)
 		{
-			if (leftHandSide.ColumnNumber != rightHandSide.RowNumber)
+			if (rightHandSide.ColumnNumber != leftHandSide.RowNumber)
 				throw new IncorrectMatrixSizesException();
 
-			var result = new Matrix(leftHandSide.RowNumber, rightHandSide.ColumnNumber);
+			var result = new Matrix(rightHandSide.RowNumber, leftHandSide.ColumnNumber);
 
-			for (int i = 0; i < leftHandSide.RowNumber; ++i)
-				for (int j = 0; j < rightHandSide.ColumnNumber; ++j)
-					for (int k = 0; k < leftHandSide.ColumnNumber; ++k)
-						result[i, j] += leftHandSide[i, k] * rightHandSide[k, j];
+			for (int i = 0; i < rightHandSide.RowNumber; ++i)
+				for (int j = 0; j < leftHandSide.ColumnNumber; ++j)
+					for (int k = 0; k < rightHandSide.ColumnNumber; ++k)
+						result[i, j] += rightHandSide[i, k] * leftHandSide[k, j];
 
 			return result;
 		}

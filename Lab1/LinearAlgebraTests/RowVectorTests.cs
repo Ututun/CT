@@ -21,7 +21,7 @@ namespace LinearAlgebraTests
 		{
 			var vector = new RowVector { 1, 1, 1 };
 			var A = new Matrix { new RowVector { -8, 4, -7 },
-								 new RowVector { 9, -14, 18},
+								 new RowVector { 9, -14, 18 },
 								 new RowVector { 3, -1, 0} };
 
             var C = vector * A;
@@ -34,7 +34,7 @@ namespace LinearAlgebraTests
         {
             var vector = new RowVector { -1, 0, 5 };
             var A = new Matrix { new RowVector { 4, -5, 3 },
-								 new RowVector { -5, 12, -8},
+								 new RowVector { -5, 12, -8 },
 								 new RowVector { -3, 1, 0} };
 
             var C = vector * A;

@@ -1,44 +1,70 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace LinearAlgebra
 {
 	public class RowVector : ICollection
 	{
-		public int Count { get; private set; }
-		int[] _array;
+		public int Count { get { return _list.Count; } }
+		List<int> _list;
 
 		public RowVector()
 		{
-			Count = 0;
-			_array = new int[Count];
+			_list = new List<int>();
 		}
 
-		public RowVector(int length)
+		public RowVector(int length) : this()
 		{
-			Count = length;
-			_array = new int[Count];
+			for (int i = 0; i < length; ++i)
+				_list.Add(0);
+		}
+
+		public RowVector(IEnumerable<int> vector) : this()
+		{
+			foreach (int item in vector)
+				_list.Add(item);
 		}
 
 		public ColumnVector GetTransposed()
         {
-            var result = new ColumnVector(Count);
-
-            for (int i = 0; i < Count; ++i)
-                result[i] = _array[i];
-
-            return result;
+            return new ColumnVector(_list);
         }
 
-		public static RowVector operator +(RowVector rightHandSide, RowVector leftHandSide)
+		public ColumnVector GetReverseTransposed()
 		{
-			if (rightHandSide.Count != leftHandSide.Count)
+			var result = new ColumnVector(Count);
+
+			for (int i = 0; i < Count; ++i)
+				result[i] = _list[Count - 1 - i];
+
+			return result;
+		}
+
+		public RowVector GetReverse()
+		{
+			var result = new RowVector(Count);
+
+			for (int i = 0; i < Count; ++i)
+				result[i] = _list[Count - 1 - i];
+
+			return result;
+		}
+
+		public RowVector GetPart(int index, int count)
+		{
+			return new RowVector(_list.GetRange(index, count));
+		}
+
+		public static RowVector operator +(RowVector leftHandSide, RowVector rightHandSide)
+		{
+			if (leftHandSide.Count != rightHandSide.Count)
 				throw new IncorrectMatrixSizesException();
 
-			var result = new RowVector(rightHandSide.Count);
+			var result = new RowVector();
 
-			for (int i = 0; i < rightHandSide.Count; ++i)
-				result[i] = rightHandSide[i] + leftHandSide[i];
+			for (int i = 0; i < leftHandSide.Count; ++i)
+				result.Add(leftHandSide[i] + rightHandSide[i]);
 
 			return result;
 		}
@@ -59,29 +85,29 @@ namespace LinearAlgebra
 
 		public static RowVector operator *(RowVector vector, int number)
 		{
-			var result = new RowVector(vector.Count);
+			var result = new RowVector();
 
 			for (int i = 0; i < vector.Count; ++i)
-				result[i] = vector[i] * number;
+				result.Add(vector[i] * number);
 
 			return result;
 		}
 
-		public static bool operator ==(RowVector rightHandSide, RowVector leftHandSide)
+		public static bool operator ==(RowVector leftHandSide, RowVector rightHandSide)
 		{
-			if (rightHandSide.Count != leftHandSide.Count)
+			if (leftHandSide.Count != rightHandSide.Count)
 				throw new IncorrectMatrixSizesException();
 
-			for (int i = 0; i < rightHandSide.Count; ++i)
-				if (rightHandSide[i] != leftHandSide[i])
+			for (int i = 0; i < leftHandSide.Count; ++i)
+				if (leftHandSide[i] != rightHandSide[i])
 					return false;
 
 			return true;
 		}
 
-		public static bool operator !=(RowVector rightHandSide, RowVector leftHandSide)
+		public static bool operator !=(RowVector leftHandSide, RowVector rightHandSide)
 		{
-			return !(rightHandSide == leftHandSide);
+			return !(leftHandSide == rightHandSide);
 		}
 
 		public static RowVector operator %(RowVector vector, int module)
@@ -100,29 +126,27 @@ namespace LinearAlgebra
 
 		public int this[int index]
 		{
-			get { return _array[index]; }
-			set { _array[index] = value; }
+			get { return _list[index]; }
+			set { _list[index] = value; }
 		}
 
 		public void Add(int item)
 		{
-			var newArray = new int[Count + 1];
-			_array.CopyTo(newArray, 0);
-			_array = newArray;
-			newArray[Count++] = item;
+			_list.Add(item);
 		}
+
 
 		#region ICollection
 
 		public IEnumerator GetEnumerator()
 		{
-			return _array.GetEnumerator();
+			return _list.GetEnumerator();
 		}
 
 		public void CopyTo(Array array, int index)
 		{
 			for (int i = 0; i < Count; ++i)
-				array.SetValue(_array[i], index + i);
+				array.SetValue(_list[i], index + i);
 		}
 
 		public bool IsSynchronized

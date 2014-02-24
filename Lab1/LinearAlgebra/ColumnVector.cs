@@ -1,34 +1,40 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace LinearAlgebra
 {
 	public class ColumnVector : ICollection
 	{
-		public int Count { get; private set; }
-		int[] _array;
+		public int Count { get { return _list.Count; } }
+		List<int> _list;
 
 		public ColumnVector()
 		{
-			Count = 0;
-			_array = new int[Count];
+			_list = new List<int>();
 		}
 
-		public ColumnVector(int height)
+		public ColumnVector(int height) : this()
 		{
-			Count = height;
-			_array = new int[Count];
+			for (int i = 0; i < height; ++i)
+				_list.Add(0);
+		}
+
+		public ColumnVector(IEnumerable<int> vector) : this()
+		{
+			foreach (int item in vector)
+				_list.Add(item);
 		}
 
         public RowVector GetTransposed()
         {
-            var result = new RowVector(Count);
-
-            for (int i = 0; i < Count; ++i)
-                result[i] = _array[i];
-
-            return result;
+            return new RowVector(_list);
         }
+
+		public ColumnVector GetPart(int index, int count)
+		{
+			return new ColumnVector(_list.GetRange(index, count));
+		}
 
 		public static ColumnVector operator *(Matrix matrix, ColumnVector vector)
 		{
@@ -54,21 +60,21 @@ namespace LinearAlgebra
 			return result;
 		}
 
-		public static bool operator ==(ColumnVector rightHandSide, ColumnVector leftHandSide)
+		public static bool operator ==(ColumnVector leftHandSide, ColumnVector rightHandSide)
 		{
-			if (rightHandSide.Count != leftHandSide.Count)
+			if (leftHandSide.Count != rightHandSide.Count)
 				throw new IncorrectMatrixSizesException();
 
-			for (int i = 0; i < rightHandSide.Count; ++i)
-				if (rightHandSide[i] != leftHandSide[i])
+			for (int i = 0; i < leftHandSide.Count; ++i)
+				if (leftHandSide[i] != rightHandSide[i])
 					return false;
 
 			return true;
 		}
 
-		public static bool operator !=(ColumnVector rightHandSide, ColumnVector leftHandSide)
+		public static bool operator !=(ColumnVector leftHandSide, ColumnVector rightHandSide)
 		{
-			return !(rightHandSide == leftHandSide);
+			return !(leftHandSide == rightHandSide);
 		}
 
 		public static ColumnVector operator %(ColumnVector vector, int module)
@@ -87,29 +93,26 @@ namespace LinearAlgebra
 
 		public int this[int index]
 		{
-			get { return _array[index]; }
-			set { _array[index] = value; }
+			get { return _list[index]; }
+			set { _list[index] = value; }
 		}
 
 		public void Add(int item)
 		{
-			var newArray = new int[Count + 1];
-			_array.CopyTo(newArray, 0);
-			_array = newArray;
-			newArray[Count++] = item;
+			_list.Add(item);
 		}
 
 		#region ICollection
 
 		public IEnumerator GetEnumerator()
 		{
-			return _array.GetEnumerator();
+			return _list.GetEnumerator();
 		}
 
 		public void CopyTo(Array array, int index)
 		{
 			for (int i = 0; i < Count; ++i)
-				array.SetValue(_array[i], index + i);
+				array.SetValue(_list[i], index + i);
 		}
 
 		public bool IsSynchronized
