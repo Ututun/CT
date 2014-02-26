@@ -76,7 +76,10 @@
 				else
 					g = GetResidueInZp(g, f, module);
 
-			return f.LeadingCoefficient == 0 ? g : f;
+			if (f.IsZeroPolynomial() || !g.IsZeroPolynomial() && g.Degree == 0)
+				return g;
+			else
+				return f;
 		}
 
 		public static void TakeByModule(ref Polynomial polynomial, int module)

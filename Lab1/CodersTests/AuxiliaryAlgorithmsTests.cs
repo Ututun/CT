@@ -10,42 +10,42 @@ namespace CodersTests
 		[TestMethod]
 		public void FindPrimeDividersTest1()
 		{
-			CollectionAssert.AreEqual(new List<int> { 3, 5 }, AuxiliaryAlgorithms.FindPrimeDividers(15));
+			CollectionAssert.AreEqual(new List<int> { 3, 5 }, HammingCoderAuxiliaryAlgorithms.FindPrimeDividers(15));
 		}
 
 		[TestMethod]
 		public void FindPrimeDividersTest2()
 		{
-			CollectionAssert.AreEqual(new List<int> { 2, 3, 5 }, AuxiliaryAlgorithms.FindPrimeDividers(60));
+			CollectionAssert.AreEqual(new List<int> { 2, 3, 5 }, HammingCoderAuxiliaryAlgorithms.FindPrimeDividers(60));
 		}
 
 		[TestMethod]
 		public void FindPrimeDividersTest3()
 		{
-			CollectionAssert.AreEqual(new List<int> { 2, 3, 5, 11, 13 }, AuxiliaryAlgorithms.FindPrimeDividers(8580));
+			CollectionAssert.AreEqual(new List<int> { 2, 3, 5, 11, 13 }, HammingCoderAuxiliaryAlgorithms.FindPrimeDividers(8580));
 		}
 
 		[TestMethod]
 		public void FindPrimeDividersTest4()
 		{
-			CollectionAssert.AreEqual(new List<int> { 3, 5, 11, 13, 19 }, AuxiliaryAlgorithms.FindPrimeDividers(40755));
+			CollectionAssert.AreEqual(new List<int> { 3, 5, 11, 13, 19 }, HammingCoderAuxiliaryAlgorithms.FindPrimeDividers(40755));
 		}
 
 		[TestMethod]
 		public void FindPrimeDividersTest5()
 		{
-			CollectionAssert.AreEqual(new List<int> { 7, 11, 31 }, AuxiliaryAlgorithms.FindPrimeDividers(2387));
+			CollectionAssert.AreEqual(new List<int> { 7, 11, 31 }, HammingCoderAuxiliaryAlgorithms.FindPrimeDividers(2387));
 		}
 		[TestMethod]
 		public void FindPrimeDividersTest6()
 		{
-			CollectionAssert.AreEqual(new List<int> { 17, 19, 41, 59 }, AuxiliaryAlgorithms.FindPrimeDividers(781337));
+			CollectionAssert.AreEqual(new List<int> { 17, 19, 41, 59 }, HammingCoderAuxiliaryAlgorithms.FindPrimeDividers(781337));
 		}
 
 		[TestMethod]
 		public void FindPrimeDividersTest7()
 		{
-			CollectionAssert.AreEqual(new List<int> { 3, 23, 73 }, AuxiliaryAlgorithms.FindPrimeDividers(5037));
+			CollectionAssert.AreEqual(new List<int> { 3, 23, 73 }, HammingCoderAuxiliaryAlgorithms.FindPrimeDividers(5037));
 		}
 	}
 }

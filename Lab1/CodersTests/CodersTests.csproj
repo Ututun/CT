@@ -58,6 +58,7 @@
     <Compile Include="ParityCheckingCoderTests.cs" />
     <Compile Include="HammingCoderTests.cs" />
     <Compile Include="AuxiliaryAlgorithmsTests.cs" />
+    <Compile Include="HammingCyclicCoderTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Coders\Coders.csproj">

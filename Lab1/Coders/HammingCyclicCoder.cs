@@ -16,7 +16,7 @@ namespace Coders
 			_informationCharactersNumber = informationCharactersNumber;
 			_module = module;
 
-			FindCheckingCharactersNumber();
+			_checkingCharactersNumber = HammingCoderAuxiliaryAlgorithms.FindCheckingCharactersNumber(_informationCharactersNumber, _module);
 
 			_blockLength = _informationCharactersNumber + _checkingCharactersNumber;
 
@@ -48,12 +48,12 @@ namespace Coders
 			_checkingPolynomial.LeadingCoefficient = 1;
 			_checkingPolynomial[0] = -1;
 
-			var _checkingCharactersNumberPrimeDividers = AuxiliaryAlgorithms.FindPrimeDividers(_checkingCharactersNumber);
+			var _checkingCharactersNumberPrimeDividers = HammingCoderAuxiliaryAlgorithms.FindPrimeDividers(_checkingCharactersNumber);
 
 			_checkingPolynomials = new List<Polynomial>();
-			foreach (int i in _checkingCharactersNumberPrimeDividers)
+			foreach (int divider in _checkingCharactersNumberPrimeDividers)
 			{
-				var newPolynomial = new Polynomial(i - 1);
+				var newPolynomial = new Polynomial((int)Math.Pow(_module, _checkingCharactersNumber / divider) - 1);
 				newPolynomial.LeadingCoefficient = 1;
 				newPolynomial[0] = -1;
 
@@ -110,26 +110,13 @@ namespace Coders
 			return true;
 		}
 
-		private void FindCheckingCharactersNumber()
-		{
-			int result = 1, powers = _module;
-
-			while ((powers - 1) / (_module - 1) < result + _informationCharactersNumber)
-			{
-				++result;
-				powers *= _module;
-			}
-
-			_checkingCharactersNumber = result;
-		}
-
 		public override RowVector Encode(RowVector information)
 		{
 			var informationPolynomial = new Polynomial(information);
 
 			var resultPolynomial = (informationPolynomial * _codingPolynomial) % _module;
 
-			return resultPolynomial.Coefficients;
+			return resultPolynomial.GetRowVector(_blockLength);
 		}
 
 		public override RowVector Decode(RowVector cipher)
@@ -137,16 +124,14 @@ namespace Coders
 			var cipherPolynomial = new Polynomial(cipher);
 			var errorSyndromePolynomial = Algorithm.GetResidueInZp(cipherPolynomial, _codingPolynomial, _module);
 
-			var errorSyndrome = new RowVector(_checkingCharactersNumber);
-			for (int i = 0; i < errorSyndromePolynomial.Count; ++i)
-				errorSyndrome[_checkingCharactersNumber - 1 - i] = errorSyndromePolynomial[i];
+			var errorSyndrome = errorSyndromePolynomial.GetRowVector(_checkingCharactersNumber);
 
-			int errorPosition = FindErrorPosition(errorSyndrome);
+			int errorPosition = HammingCoderAuxiliaryAlgorithms.FindErrorPosition(_checkingMatrix, errorSyndrome, _module);
 
 			if (errorPosition >= 0)
 			{
 				for (int i = 1; i < _module; ++i)
-					if (IsZeroRowVector(((_checkingMatrix[errorPosition].GetTransposed() * i) + errorSyndrome) % _module))
+					if (HammingCoderAuxiliaryAlgorithms.IsZeroRowVector(((_checkingMatrix[errorPosition].GetTransposed() * i) + errorSyndrome) % _module))
 					{
 						cipher[errorPosition] = (cipher[errorPosition] + i) % _module;
 						break;
@@ -156,39 +141,7 @@ namespace Coders
 			cipherPolynomial = new Polynomial(cipher);
 			var resultPolynomial = Algorithm.GetQuotientInZp(cipherPolynomial, _codingPolynomial, _module);
 
-			return resultPolynomial.Coefficients;
-		}
-
-		private int FindErrorPosition(RowVector errorSyndrome)
-		{
-			var errorVectors = new RowVector[_module - 1];
-			for (int i = 1; i < _module; ++i)
-				errorVectors[i - 1] = (errorSyndrome * i) % _module;
-
-			for (int i = 0; i < _blockLength; ++i)
-				for (int j = 0; j < _module - 1; ++j)
-					if (_checkingMatrix[i].GetTransposed() == errorVectors[j])
-						return i;
-
-			return -1;
-		}
-
-		private bool IsZeroRowVector(RowVector vector)
-		{
-			for (int i = 0; i < vector.Count; ++i)
-				if (vector[i] > 0)
-					return false;
-
-			return true;
-		}
-
-		private bool IsCheckingCharacter(int index)
-		{
-			int counter = 0;
-			for (int i = 0; i < _checkingCharactersNumber; ++i)
-				counter += _checkingMatrix[i, index];
-
-			return counter == 1;
+			return resultPolynomial.GetRowVector(_informationCharactersNumber);
 		}
 	}
 }

@@ -13,69 +13,9 @@ namespace Coders
 			_informationCharactersNumber = informationCharactersNumber;
 			_module = module;
 
-			FindCheckingCharactersNumber();
+			_checkingCharactersNumber = HammingCoderAuxiliaryAlgorithms.FindCheckingCharactersNumber(_informationCharactersNumber, _module);
 			_blockLength = _informationCharactersNumber + _checkingCharactersNumber;
-			FindCheckingMatrix();
-		}
-
-		private void FindCheckingMatrix()
-		{
-			_checkingMatrix = new Matrix(_checkingCharactersNumber, _blockLength);
-			var mark = new bool[(int) Math.Pow(_module, _checkingCharactersNumber) - 1];
-
-			for (int i = 0, vectorCounter = 1; i < _blockLength; ++vectorCounter)
-				if (!mark[vectorCounter - 1])
-				{
-					var newColumn = GetColumnVectorByNumber(vectorCounter);
-					_checkingMatrix[i] = newColumn;
-
-					for (int j = 2; j < _module; ++j)
-					{
-						var temporalColumn = (newColumn * j) % _module;
-						mark[GetNumberByColumnVector(temporalColumn) - 1] = true;
-					}
-
-					++i;
-				}
-		}
-
-		private ColumnVector GetColumnVectorByNumber(int number)
-		{
-			var result = new ColumnVector(_checkingCharactersNumber);
-
-			for (int j = _checkingCharactersNumber - 1; j >= 0; --j)
-			{
-				result[j] = number % _module;
-				number /= _module;
-			}
-
-			return result;
-		}
-
-		private int GetNumberByColumnVector(ColumnVector vector)
-		{
-			int result = 0, digit = 1;
-
-			for (int i = vector.Count - 1; i >= 0; --i)
-			{
-				result += vector[i] * digit;
-				digit *= _module;
-			}
-
-			return result;
-		}
-
-		private void FindCheckingCharactersNumber()
-		{
-			int result = 1, powers = _module;
-
-			while ((powers - 1) / (_module - 1) < result + _informationCharactersNumber)
-			{
-				++result;
-				powers *= _module;
-			}
-
-			_checkingCharactersNumber = result;
+			_checkingMatrix = HammingCoderAuxiliaryAlgorithms.FindCheckingMatrix(_checkingCharactersNumber, _blockLength, _module);
 		}
 
 		public override RowVector Encode(RowVector information)
@@ -84,12 +24,12 @@ namespace Coders
 
 			int counter = 0;
 			for (int i = 0; i < _blockLength; ++i)
-				if (!IsCheckingCharacter(i))
+				if (!HammingCoderAuxiliaryAlgorithms.IsUnitVector(_checkingMatrix[i]))
 					result[i] = information[counter++];
 
 			counter = _checkingCharactersNumber - 1;
 			for (int i = 0; i < _blockLength; ++i)
-				if (IsCheckingCharacter(i))
+				if (HammingCoderAuxiliaryAlgorithms.IsUnitVector(_checkingMatrix[i]))
 				{
 					for (int j = i + 1; j < _blockLength; ++j)
 						if (_checkingMatrix[counter, j] != 0)
@@ -102,34 +42,16 @@ namespace Coders
 			return result;
 		}
 
-		private bool IsCheckingCharacter(int index)
-		{
-			int counter = 0;
-			for (int i = 0; i < _checkingCharactersNumber; ++i)
-				counter += _checkingMatrix[i, index];
-
-			return counter == 1;
-		}
-
-		private bool IsZeroRowVector(RowVector vector)
-		{
-			for (int i = 0; i < vector.Count; ++i)
-				if (vector[i] > 0)
-					return false;
-
-			return true;
-		}
-
 		public override RowVector Decode(RowVector cipher)
 		{
 			var errorSyndrome = (cipher * _checkingMatrix.GetTransposed()) % _module;
 
-			int errorPosition = FindErrorPosition(errorSyndrome);
+			int errorPosition = HammingCoderAuxiliaryAlgorithms.FindErrorPosition(_checkingMatrix, errorSyndrome, _module);
 
 			if (errorPosition >= 0)
 			{
 				for (int i = 1; i < _module; ++i)
-					if (IsZeroRowVector(((_checkingMatrix[errorPosition].GetTransposed() * i) + errorSyndrome) % _module))
+					if (HammingCoderAuxiliaryAlgorithms.IsZeroRowVector(((_checkingMatrix[errorPosition].GetTransposed() * i) + errorSyndrome) % _module))
 					{
 						cipher[errorPosition] = (cipher[errorPosition] + i) % _module;
 						break;
@@ -139,24 +61,10 @@ namespace Coders
 			var result = new RowVector(_informationCharactersNumber);
 			int counter = 0;
 			for (int i = 0; i < _blockLength; ++i)
-				if (!IsCheckingCharacter(i))
+				if (!HammingCoderAuxiliaryAlgorithms.IsUnitVector(_checkingMatrix[i]))
 					result[counter++] = cipher[i];
 
 			return result;
-		}
-
-		private int FindErrorPosition(RowVector errorSyndrome)
-		{
-			var errorVectors = new RowVector[_module - 1];
-			for (int i = 1; i < _module; ++i)
-				errorVectors[i - 1] = (errorSyndrome * i) % _module;
-
-			for (int i = 0; i < _blockLength; ++i)
-				for (int j = 0; j < _module - 1; ++j)
-					if (_checkingMatrix[i].GetTransposed() == errorVectors[j])
-						return i;
-
-			return -1;
 		}
 	}
 }

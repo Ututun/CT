@@ -23,8 +23,9 @@ namespace LinearAlgebra
 
 		public Polynomial(RowVector coefficients)
 		{
-			Degree = coefficients.Count + 1;
+			Degree = coefficients.Count - 1;
 			Coefficients = coefficients;
+			DeleteLeadingZeros();
 		}
 
 		private static void Swap(Polynomial leftHandSide, Polynomial rightHandSide)
@@ -40,6 +41,21 @@ namespace LinearAlgebra
 				--Degree;
 
 			Coefficients = Coefficients.GetPart(0, Degree + 1);
+		}
+
+		public bool IsZeroPolynomial()
+		{
+			return Degree == 0 && LeadingCoefficient == 0;
+		}
+
+		public RowVector GetRowVector(int length)
+		{
+			var result = new RowVector(length);
+
+			for (int i = 0; i < length && i < Count; ++i)
+				result[i] = Coefficients[i];
+
+			return result;
 		}
 
 		public static Polynomial operator +(Polynomial leftHandSide, Polynomial rightHandSide)

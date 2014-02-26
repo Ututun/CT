@@ -7,15 +7,10 @@ namespace ConsoleApplication1
 	{
 		static void Main(string[] args)
 		{
-			var coder = new HammingCyclicCoder(4, 3);
+			var coder = new HammingCyclicCoder(11, 2);
+			var cipher = new RowVector { 1, 2, 2, 1, 1, 2, 2 };
 
-			var info = new RowVector { 2, 1, 0, 2 };
-
-			var cipher = coder.Encode(info);
-
-			cipher[0] = 0;
-
-			var decodedInfo = coder.Decode(cipher);
+			var result = coder.Decode(cipher);
 		}
 	}
 }

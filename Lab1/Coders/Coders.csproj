@@ -42,7 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AuxiliaryAlgorithms.cs" />
+    <Compile Include="HammingCoderAuxiliaryAlgorithms.cs" />
     <Compile Include="Coder.cs" />
     <Compile Include="HammingCoder.cs" />
     <Compile Include="HammingCyclicCoder.cs" />
