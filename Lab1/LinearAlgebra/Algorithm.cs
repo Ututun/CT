@@ -49,7 +49,7 @@
 			TakeByModule(ref divider, module);
 
 			if (dividend.Degree < divider.Degree)
-				return new Polynomial(0);
+				return dividend;
 
 			while (dividend.Degree > 0 && dividend.Degree >= divider.Degree)
 			{
